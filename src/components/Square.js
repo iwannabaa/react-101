@@ -1,15 +1,10 @@
-function Square({ index, value, clickHandler, isGameOver }) {
-  const onClickHandler = () => {
-    if (!isGameOver) {
-      clickHandler(index);
-    }
-  }
+function Square({ index, value, clickHandler }) {
+  const onClickHandler = () => clickHandler(index);
 
   return (
-    <div className="square">
-      {value && <p>{value}</p>}
-      {!value && <button onClick={onClickHandler}>{index + 1}</button>}
-    </div>
+    <button className="square" onClick={onClickHandler}>
+      {value}
+    </button>
   );
 }
 

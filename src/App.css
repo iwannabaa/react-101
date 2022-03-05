@@ -8,12 +8,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
 .wrapper {
+  border: 1px solid #fff;
   display: flex;
   flex-wrap: wrap;
   width: 400px;
@@ -29,10 +29,16 @@
 }
 
 .square {
-  border: 1px solid white;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  background: none;
+  border: 1px solid #fff;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  font-size: 2rem;
+  font-weight: bold;
+  justify-content: center;
+  margin: 0;
   position: absolute;
   top: 0;
   right: 0;

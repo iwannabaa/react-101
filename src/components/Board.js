@@ -1,62 +1,77 @@
 import { useState } from "react";
 import Square from "./Square";
 
-const squares = new Array(9).fill(null);
-
 function Board() {
+  const [squares, setSquares] = useState(new Array(9).fill(null));
   const [xTurn, setXTurn] = useState(true);
-  const [winner, setWinner] = useState(null);
-  const [isGameOver, setIsGameOver] = useState(false);
+
   const handleSquareSelect = (index) => {
+    if (squares[index] || calculateWinner(squares)) {
+      return;
+    }
     squares[index] = xTurn ? "X" : "O";
-    calculateWinner(squares);
+    setSquares(squares);
     setXTurn(!xTurn);
   };
-  const calculateWinner = (squares) => {
-    let winner = 'No winner yet';
-    const winningCombinations = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6]
-    ];
-    winningCombinations.forEach(combination => {
-      if (squares[combination[0]] !== null &&
-          squares[combination[0]] === squares[combination[1]] && 
-          squares[combination[0]] === squares[combination[2]]) {
-        winner = `${squares[combination[0]]} Wins!`;
-        setIsGameOver(true);
-        setWinner(winner);
-        return;
-      }
-    });
+
+  const handleRestartGame = () => {
+    setSquares(new Array(9).fill(null));
+    setXTurn(true);
   };
 
-  const items = squares.map((s, index) => {
-    return (
-      <div className="square-wrapper" key={index}>
-        <Square
-          index={index}
-          value={s}
-          isGameOver={isGameOver}
-          clickHandler={handleSquareSelect}
-        ></Square>
-      </div>
-    );
-  });
+  const winner = calculateWinner(squares);
+  let status;
+  if (winner) {
+    status = `Winner: ${winner}`;
+  } else {
+    status = `Next Player: ${xTurn ? "X" : "O"}`;
+  }
 
   return (
     <>
-      <div className="wrapper">{items}</div>
-      {isGameOver && <p>{winner}</p>}
-      {!isGameOver && <p>It's {xTurn ? "X" : "O"} turn</p>}
-      
+      <h2>Tic Tac Toe</h2>
+      <div className="wrapper">
+        {squares.map((s, index) => {
+          return (
+            <div className="square-wrapper" key={index}>
+              <Square
+                index={index}
+                value={s}
+                clickHandler={handleSquareSelect}
+              ></Square>
+            </div>
+          );
+        })}
+      </div>
+      <p>{status}</p>
+      {winner && (
+        <button className="restart" onClick={handleRestartGame}>
+          Restart Game
+        </button>
+      )}
     </>
   );
 }
 
 export default Board;
+
+const calculateWinner = (squares) => {
+  let winner;
+  const winningCombinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  winningCombinations.forEach((combination) => {
+    const [a, b, c] = combination;
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      winner = squares[combination[0]];
+    }
+  });
+  return winner;
+};
