@@ -43,12 +43,12 @@ function Board() {
           );
         })}
       </div>
-      <p>{status}</p>
-      {winner && (
+      <div className="game-info">
+        <p>{status}</p>
         <button className="restart" onClick={handleRestartGame}>
-          Restart Game
+          Restart
         </button>
-      )}
+      </div>
     </>
   );
 }

@@ -10,6 +10,7 @@
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding-bottom: 1rem;
 }
 
 .wrapper {
@@ -35,7 +36,7 @@
   color: #fff;
   cursor: pointer;
   display: flex;
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bold;
   justify-content: center;
   margin: 0;
@@ -44,4 +45,31 @@
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+.game-info {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  max-width: 400px;
+  width: 100%;
+}
+
+.game-info p {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.restart {
+  font-size: 1rem;
+  background: #2e86a1;
+  box-shadow: 0 2px 2px 0 rgba(6, 26, 36, 0.83);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  border: none;
+  font-weight: bold;
+  padding: 0.25rem 1rem;
 }
